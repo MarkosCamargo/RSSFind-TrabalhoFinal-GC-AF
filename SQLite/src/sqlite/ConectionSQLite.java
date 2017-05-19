@@ -5,6 +5,9 @@
  */
 package sqlite;
 
+import java.net.URL;
+import java.util.ArrayList;
+
 /**
  *
  * @author Matrix
@@ -14,5 +17,6 @@ public interface ConectionSQLite {
     public void setUpdate(String script);
     public void setInsert(String script);
     public void setDelete(String script);
+    public ArrayList<URL> getListaUrl();
     
 }

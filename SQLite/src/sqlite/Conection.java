@@ -5,23 +5,27 @@
  */
 package sqlite;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Matrix
  */
 public class Conection implements ConectionSQLite {
+
+    public Conection() {
+        setCreateTables();
+    }
 
     @Override
     public void setUpdate(String script) {
@@ -31,6 +35,7 @@ public class Conection implements ConectionSQLite {
             comando.executeUpdate(script);
         } catch (SQLException ex) {
             Logger.getLogger(Conection.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, Conection.class.getName());
         }
     }
 
@@ -38,11 +43,25 @@ public class Conection implements ConectionSQLite {
     public void setInsert(String script) {
         try {
             Statement comando = getConection().createStatement();
-            comando.executeUpdate(txtParaString("src\\database\\DDL-DML.txt"));
             comando.executeUpdate(script);
         } catch (SQLException ex) {
-            Logger.getLogger(Conection.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, Conection.class.getName());
         }
+    }
+
+    private void setCreateTables() {
+        Statement comando = null;
+        try {
+            comando = getConection().createStatement();
+            String script = "CREATE  TABLE  IF NOT EXISTS \"Termo\" (\"ID\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , \"palavra\" VARCHAR); \n"
+                    + "CREATE  TABLE  IF NOT EXISTS \"Site\" (\"ID\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , \"Url\" VARCHAR); \n"
+                    + "CREATE  TABLE  IF NOT EXISTS \"Noticia\" (\"ID\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , \"Titulo\" VARCHAR, \"Link\" VARCHAR, \"Noticia\" VARCHAR);";
+
+            comando.executeUpdate(script);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, Conection.class.getName());
+        }
+
     }
 
     @Override
@@ -51,7 +70,7 @@ public class Conection implements ConectionSQLite {
             Statement comando = getConection().createStatement();
             comando.executeUpdate(script);
         } catch (SQLException ex) {
-            Logger.getLogger(Conection.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, Conection.class.getName());
         }
     }
 
@@ -59,29 +78,31 @@ public class Conection implements ConectionSQLite {
         Connection c = null;
         try {
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:src\\database\\RssFind.sqlite");
+            c = DriverManager.getConnection("jdbc:sqlite:DataBase\\RssFind.sqlite");
             return c;
         } catch (Exception e) {
             return null;
         }
     }
 
-    private String txtParaString(String caminho) {
+    @Override
+    public ArrayList<URL> getListaUrl() {
+        ArrayList<URL> lista = new ArrayList<>();
+        Statement comando;
         try {
-            File file = new File(caminho);//txt que contém comandos DDL e DML
-            //ISO-8859-1 para ler as acentuações corretamente:
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file), "ISO-8859-1"));
-            StringBuffer stringBuffer = new StringBuffer();
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                stringBuffer.append(line);
-                stringBuffer.append("\n");
+            comando = getConection().createStatement();
+            ResultSet resultado = comando.executeQuery("select Url from Site");
+            while (resultado.next()) {
+                String Url = resultado.getString("Url");
+                lista.add(new URL(Url));
             }
-            return stringBuffer.toString();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conection.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(Conection.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return "Erro";
+
+        return lista;
     }
 
 }
