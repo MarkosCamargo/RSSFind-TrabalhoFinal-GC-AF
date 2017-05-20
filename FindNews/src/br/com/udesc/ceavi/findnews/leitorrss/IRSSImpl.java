@@ -21,6 +21,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import sqlite.Conection;
 
 /**
  *
@@ -31,17 +32,12 @@ public class IRSSImpl implements IRSS {
     @Override
     public List<Noticia> verificaNoticiasManual() {
 
-        //pegar os sites
-        List<URL> sites = new ArrayList<>();
-        try {
-            sites.add(new URL("http://www.valor.com.br/financas/rss"));
-            sites.add(new URL("http://www.infomoney.com.br/ultimas-noticias/rss"));
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(IRSSImpl.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        //pegar os sites do banco de dados
+        Conection conn = new Conection();
+        List<URL> sites = conn.getListaUrl();
 
         List<String> palavrasChaves = new ArrayList<>();
-        palavrasChaves.add("Dolar");
+        palavrasChaves.add("dólar");
         palavrasChaves.add("Dinheiro");
         List<Noticia> noticias = new ArrayList<>();
         for (URL site : sites) {
@@ -72,7 +68,7 @@ public class IRSSImpl implements IRSS {
             while (itEntries.hasNext()) {
                 SyndEntry entry = (SyndEntry) itEntries.next();
                 for (String chave : palavrasChaves) {
-                    if (entry.getTitle().equalsIgnoreCase(chave) || entry.getDescription().getValue().equalsIgnoreCase(chave)) {
+                    if (entry.getTitle().contains(chave) || entry.getDescription().getValue().contains(chave)) {
                         try {
                             noticias.add(new Noticia(entry.getTitle(), entry.getDescription().getValue(), new URL(entry.getLink())));
                         } catch (MalformedURLException ex) {

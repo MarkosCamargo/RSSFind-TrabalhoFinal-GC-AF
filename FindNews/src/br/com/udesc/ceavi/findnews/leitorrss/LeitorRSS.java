@@ -34,12 +34,12 @@ public class LeitorRSS {
 //
 
         //biblioteca rome.jar
-//        System.out.println("----------------  VALOR RSS FEED   ---------------------------");
-//        URL feedUrl = new URL("http://www.valor.com.br/financas/rss");
-//        Charset inputCharset = Charset.forName("UTF-8");
-        System.out.println("----------------  ECONOMIA UOL RSS FEED   ---------------------------");
-        URL feedUrl = new URL("http://rss.uol.com.br/feed/economia.xml");
-        Charset inputCharset = Charset.forName("ISO-8859-1");
+        System.out.println("----------------  VALOR RSS FEED   ---------------------------");
+        URL feedUrl = new URL("http://www.valor.com.br/financas/rss");
+        Charset inputCharset = Charset.forName("UTF-8");
+//        System.out.println("----------------  ECONOMIA UOL RSS FEED   ---------------------------");
+//        URL feedUrl = new URL("http://rss.uol.com.br/feed/economia.xml");
+//        Charset inputCharset = Charset.forName("ISO-8859-1");
       
         HttpURLConnection httpcon = (HttpURLConnection) feedUrl.openConnection();
 //        System.out.println(  httpcon.getHeaderFields().toString());
