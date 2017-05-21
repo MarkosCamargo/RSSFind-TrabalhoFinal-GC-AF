@@ -20,6 +20,7 @@ public interface ConectionSQLite {
     public ArrayList<URL> getListaUrl();
     public ArrayList<String> getTermos();
     public ArrayList<String> getHorarios();
+    public String getRegistroString(String Script, String coluna);
     
     
 }

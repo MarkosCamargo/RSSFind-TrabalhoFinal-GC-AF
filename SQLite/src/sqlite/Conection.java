@@ -56,6 +56,7 @@ public class Conection implements ConectionSQLite {
             String script = "CREATE  TABLE  IF NOT EXISTS \"Termo\" (\"ID\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , \"palavra\" VARCHAR); \n"
                     + "CREATE  TABLE  IF NOT EXISTS \"Site\" (\"ID\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , \"Url\" VARCHAR); \n"
                     + "CREATE  TABLE  IF NOT EXISTS \"Horario\" (\"ID\" INTEGER PRIMARY KEY  NOT NULL  UNIQUE , \"Horario\" VARCHAR); \n"
+                    + "CREATE  TABLE  IF NOT EXISTS \"Email\" (\"ID\" INTEGER PRIMARY KEY  NOT NULL  UNIQUE , \"Email\" VARCHAR NOT NULL , \"Senha\" VARCHAR); \n"
                     + "CREATE  TABLE  IF NOT EXISTS \"Noticia\" (\"ID\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , \"Titulo\" VARCHAR, \"Link\" VARCHAR, \"Noticia\" VARCHAR);";
 
             comando.executeUpdate(script);
@@ -125,7 +126,36 @@ public class Conection implements ConectionSQLite {
 
     @Override
     public ArrayList<String> getHorarios() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<String> lista = new ArrayList<>();
+        Statement comando;
+        try {
+            comando = getConection().createStatement();
+            ResultSet resultado = comando.executeQuery("select Horario from Horario");
+            while (resultado.next()) {
+                lista.add(resultado.getString("Horario"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Conection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return lista;
+    }
+
+    @Override
+    public String getRegistroString(String Script, String coluna) {
+        String colunaRetorno = "";
+        Statement comando;
+        try {
+            comando = getConection().createStatement();
+            ResultSet resultado = comando.executeQuery(Script);
+            if (resultado.next()) {
+                colunaRetorno = resultado.getString(coluna);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Conection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return colunaRetorno;
     }
 
 }
