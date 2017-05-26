@@ -36,6 +36,8 @@ public class Conection implements ConectionSQLite {
         } catch (SQLException ex) {
             Logger.getLogger(Conection.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, Conection.class.getName());
+        } finally {
+            FecharConexao();
         }
     }
 
@@ -46,6 +48,8 @@ public class Conection implements ConectionSQLite {
             comando.executeUpdate(script);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, Conection.class.getName());
+        } finally {
+            FecharConexao();
         }
     }
 
@@ -62,6 +66,8 @@ public class Conection implements ConectionSQLite {
             comando.executeUpdate(script);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, Conection.class.getName());
+        } finally {
+            FecharConexao();
         }
 
     }
@@ -73,6 +79,8 @@ public class Conection implements ConectionSQLite {
             comando.executeUpdate(script);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, Conection.class.getName());
+        } finally {
+            FecharConexao();
         }
     }
 
@@ -84,6 +92,8 @@ public class Conection implements ConectionSQLite {
             return c;
         } catch (Exception e) {
             return null;
+        } finally {
+            FecharConexao();
         }
     }
 
@@ -102,6 +112,8 @@ public class Conection implements ConectionSQLite {
             Logger.getLogger(Conection.class.getName()).log(Level.SEVERE, null, ex);
         } catch (MalformedURLException ex) {
             Logger.getLogger(Conection.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            FecharConexao();
         }
 
         return lista;
@@ -119,6 +131,8 @@ public class Conection implements ConectionSQLite {
             }
         } catch (SQLException ex) {
             Logger.getLogger(Conection.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            FecharConexao();
         }
 
         return lista;
@@ -136,6 +150,8 @@ public class Conection implements ConectionSQLite {
             }
         } catch (SQLException ex) {
             Logger.getLogger(Conection.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            FecharConexao();
         }
 
         return lista;
@@ -153,6 +169,8 @@ public class Conection implements ConectionSQLite {
             }
         } catch (SQLException ex) {
             Logger.getLogger(Conection.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            FecharConexao();
         }
 
         return colunaRetorno;
@@ -162,7 +180,7 @@ public class Conection implements ConectionSQLite {
     public void setInsertUrl(String Url) {
         try {
             Statement comando = getConection().createStatement();
-            comando.executeUpdate("insert into Site(Url) values(\""+Url+"\")");
+            comando.executeUpdate("insert into Site(Url) values(\"" + Url + "\")");
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, Conection.class.getName());
@@ -177,6 +195,19 @@ public class Conection implements ConectionSQLite {
             return true;
         } catch (SQLException e) {
             return false;
+        }
+    }
+
+    @Override
+    public void setInsertTermos(String Termo) {
+        try {
+            Statement comando = getConection().createStatement();
+            comando.executeUpdate("insert into Termo(palavra) values(\"" + Termo + "\")");
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, Conection.class.getName());
+        } finally {
+            FecharConexao();
         }
     }
 

@@ -18,6 +18,7 @@ public interface ConectionSQLite {
     public void setInsert(String script);
     public void setDelete(String script);
     public void setInsertUrl(String Url);
+    public void setInsertTermos(String Termo);
     public ArrayList<URL> getListaUrl();
     public ArrayList<String> getTermos();
     public ArrayList<String> getHorarios();
