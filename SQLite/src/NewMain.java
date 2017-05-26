@@ -1,6 +1,5 @@
 
-import java.time.LocalTime;
-import javax.swing.JOptionPane;
+import sqlite.Conection;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -14,9 +13,9 @@ import javax.swing.JOptionPane;
 public class NewMain {
 
     public static void main(String[] args) {        
-        LocalTime time = LocalTime.now();
-        JOptionPane.showMessageDialog(null, time.getHour());
-        JOptionPane.showMessageDialog(null, time.getMinute());
+        Conection teste = new Conection();
+        teste.setInsertUrl("Perrereca");
+                
 
     }
 

@@ -158,4 +158,26 @@ public class Conection implements ConectionSQLite {
         return colunaRetorno;
     }
 
+    @Override
+    public void setInsertUrl(String Url) {
+        try {
+            Statement comando = getConection().createStatement();
+            comando.executeUpdate("insert into Site(Url) values(\""+Url+"\")");
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, Conection.class.getName());
+        } finally {
+            FecharConexao();
+        }
+    }
+
+    public boolean FecharConexao() {
+        try {
+            getConection().close();
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+
 }
