@@ -16,12 +16,12 @@ public class formPrincipal {
 
     view.formRssFind formPrincipal = null;
     controller.formCadastroSites telaCadastroSites = null;
-   
+    controller.formCadastroTermos telaCadastroTermos = null;
 
     public formPrincipal() {
         formPrincipal = new view.formRssFind();
         telaCadastroSites = new controller.formCadastroSites();
-        
+        telaCadastroTermos = new controller.formCadastroTermos();
         ligaEventos();
 
     }
@@ -36,11 +36,16 @@ public class formPrincipal {
             @Override
             public void actionPerformed(ActionEvent e) {
                 telaCadastroSites.chamaTelaCadastroSites();
-
             }
         });
 
- 
+        formPrincipal.mmCadastrarTermos.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                telaCadastroTermos.chamaTelaCadastroTermos();
+            }
+        });
 
         formPrincipal.mmSair.addActionListener(new ActionListener() {
             @Override

@@ -11,46 +11,46 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author CCE User
+ * @author Matrix
  */
-public class formCadastroSites {
+public class formCadastroTermos {
 
-    private view.formCadastroSites telaCadastroSites = null;
+    private view.formCadastroTermos telaCadastroTermos = null;
     private sqlite.Conection banco = null;
 
-    public formCadastroSites() {
-        telaCadastroSites = new view.formCadastroSites(null, true);
+    public formCadastroTermos() {
+        telaCadastroTermos = new view.formCadastroTermos(null, true);
         banco = new sqlite.Conection();
         ligaEventos();
     }
 
     private void limparTela() {
-        telaCadastroSites.edUrl.setText("");
-        telaCadastroSites.edUrl.requestFocus();
+        telaCadastroTermos.edTermo.setText("");
+        telaCadastroTermos.edTermo.requestFocus();
     }
 
-    public void chamaTelaCadastroSites() {
+    public void chamaTelaCadastroTermos() {
         limparTela();
-        telaCadastroSites.setVisible(true);
+        telaCadastroTermos.setVisible(true);
     }
 
     private void gravarUrl() {
-        if (telaCadastroSites.edUrl.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Obrigatório informar URL.");
+        if (telaCadastroTermos.edTermo.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Obrigatório informar Termo.");
         } else {
-            banco.setInsertUrl(telaCadastroSites.edUrl.getText());
+            banco.setInsertUrl(telaCadastroTermos.edTermo.getText());
             JOptionPane.showMessageDialog(null, "Incluido com sucesso.");
             limparTela();
         }
     }
 
     private void fecharTelaCadastroSites() {
-        telaCadastroSites.setVisible(false);
+        telaCadastroTermos.setVisible(false);
     }
 
     private void ligaEventos() {
 
-        telaCadastroSites.btnGravar.addActionListener(new ActionListener() {
+        telaCadastroTermos.btnGravar.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -58,7 +58,7 @@ public class formCadastroSites {
             }
         });
 
-        telaCadastroSites.btnSair.addActionListener(new ActionListener() {
+        telaCadastroTermos.btnSair.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -66,7 +66,7 @@ public class formCadastroSites {
             }
         });
 
-        telaCadastroSites.btnLimpar.addActionListener(new ActionListener() {
+        telaCadastroTermos.btnLimpar.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
