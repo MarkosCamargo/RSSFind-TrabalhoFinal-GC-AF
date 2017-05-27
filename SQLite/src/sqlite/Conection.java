@@ -92,8 +92,6 @@ public class Conection implements ConectionSQLite {
             return c;
         } catch (Exception e) {
             return null;
-        } finally {
-            FecharConexao();
         }
     }
 
@@ -203,6 +201,19 @@ public class Conection implements ConectionSQLite {
         try {
             Statement comando = getConection().createStatement();
             comando.executeUpdate("insert into Termo(palavra) values(\"" + Termo + "\")");
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, Conection.class.getName());
+        } finally {
+            FecharConexao();
+        }
+    }
+
+    @Override
+    public void setInsertHorario(String horario) {
+        try {
+            Statement comando = getConection().createStatement();
+            comando.executeUpdate("insert into horario(horario) values(\"" + horario + "\")");
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, Conection.class.getName());
