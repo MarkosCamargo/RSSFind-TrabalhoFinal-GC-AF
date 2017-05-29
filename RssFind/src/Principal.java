@@ -1,5 +1,6 @@
 
 import controller.formPrincipal;
+import java.io.IOException;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -13,7 +14,7 @@ import controller.formPrincipal;
  */
 public class Principal {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         controller.formPrincipal telaPrincipal = new formPrincipal();
         telaPrincipal.chamaTelaPrincipal();
     }

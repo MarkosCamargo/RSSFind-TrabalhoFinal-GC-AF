@@ -23,7 +23,7 @@ public class formPrincipal {
     controller.formCadastroHorarios telaCadastroHorarios = null;
     controller.formEditarSites telaEditarSites = null;
 
-    public formPrincipal() {
+    public formPrincipal() throws IOException {
         formPrincipal = new view.formRssFind();
         telaCadastroSites = new controller.formCadastroSites();
         telaCadastroTermos = new controller.formCadastroTermos();
