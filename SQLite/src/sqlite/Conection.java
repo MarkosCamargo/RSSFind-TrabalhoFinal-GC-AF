@@ -222,4 +222,18 @@ public class Conection implements ConectionSQLite {
         }
     }
 
+    @Override
+    public void setUpdateUrl(String UrlAtual, String novaUrl) {
+        try {
+            Statement comando = getConection().createStatement();
+            comando.executeUpdate("update site set Url = \""+novaUrl+"\" where Url like '%"+UrlAtual+"%'");
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, Conection.class.getName());
+        } finally {
+            FecharConexao();
+        }
+
+    }
+
 }
