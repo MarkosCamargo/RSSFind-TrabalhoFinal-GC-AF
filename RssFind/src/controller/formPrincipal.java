@@ -22,6 +22,7 @@ public class formPrincipal {
     controller.formCadastroTermos telaCadastroTermos = null;
     controller.formCadastroHorarios telaCadastroHorarios = null;
     controller.formEditarSites telaEditarSites = null;
+    controller.formEditarTermo telaEditarTermos = null;
 
     public formPrincipal() throws IOException {
         formPrincipal = new view.formRssFind();
@@ -29,6 +30,7 @@ public class formPrincipal {
         telaCadastroTermos = new controller.formCadastroTermos();
         telaCadastroHorarios = new controller.formCadastroHorarios();
         telaEditarSites = new controller.formEditarSites();
+        telaEditarTermos = new controller.formEditarTermo();
         ligaEventos();
 
     }
@@ -38,6 +40,18 @@ public class formPrincipal {
     }
 
     private void ligaEventos() {
+
+        formPrincipal.mmEditarTemros.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    telaEditarTermos.chamaTelaEditarTermos();
+                } catch (IOException ex) {
+                    Logger.getLogger(formPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
 
         formPrincipal.mmEditarSites.addActionListener(new ActionListener() {
 
