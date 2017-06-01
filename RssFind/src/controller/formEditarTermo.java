@@ -52,31 +52,31 @@ public class formEditarTermo {
         tela.setVisible(false);
     }
 
-//    private void alterar() throws IOException {
-//        String novoTermo = tela.edTermo.getText();
-//        if (novoTermo.isEmpty()) {
-//            JOptionPane.showMessageDialog(null, "Obrigatório informar o novo termo para alterar.");
-//        } else if (!novoTermo.equalsIgnoreCase(termoAtual)) {
-//            banco.setUpdateTermo(termoAtual, novoTermo);
-//            CarregaTableModel();
-//            JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
-//            limparTela();
-//        }
-//    }
+    private void alterar() throws IOException {
+        String novoTermo = tela.edTermo.getText();
+        if (novoTermo.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Obrigatório informar o novo termo para alterar.");
+        } else if (!novoTermo.equalsIgnoreCase(termoAtual)) {
+            banco.setUpdateTermo(termoAtual, novoTermo);
+            CarregaTableModel();
+            JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
+            limparTela();
+        }
+    }
 
     private void ligaEventos() throws IOException {
 
-//        tela.btnAlterar.addActionListener(new ActionListener() {
-//
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                try {
-//                    alterar();
-//                } catch (IOException ex) {
-//                    Logger.getLogger(formEditarSites.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }
-//        });
+        tela.btnAlterar.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    alterar();
+                } catch (IOException ex) {
+                    Logger.getLogger(formEditarSites.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
 
         tela.btnSair.addActionListener(new ActionListener() {
 
