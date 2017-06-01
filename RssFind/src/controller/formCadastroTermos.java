@@ -38,7 +38,7 @@ public class formCadastroTermos {
         if (telaCadastroTermos.edTermo.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Obrigatório informar Termo.");
         } else {
-            banco.setInsertUrl(telaCadastroTermos.edTermo.getText());
+            banco.setInsertTermos(telaCadastroTermos.edTermo.getText());
             JOptionPane.showMessageDialog(null, "Incluido com sucesso.");
             limparTela();
         }
