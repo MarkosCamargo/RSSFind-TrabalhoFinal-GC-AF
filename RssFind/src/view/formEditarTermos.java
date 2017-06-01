@@ -38,6 +38,7 @@ public class formEditarTermos extends javax.swing.JDialog {
         btnSair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel1.setText("EDITAR TERMO");
@@ -112,6 +113,7 @@ public class formEditarTermos extends javax.swing.JDialog {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void tableTermosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableTermosMouseClicked
