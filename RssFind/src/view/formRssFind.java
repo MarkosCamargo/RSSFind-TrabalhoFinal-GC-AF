@@ -28,7 +28,6 @@ public class formRssFind extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuBar1 = new javax.swing.JMenuBar();
-        mmSair = new javax.swing.JMenu();
         mmCadastrar = new javax.swing.JMenu();
         mmCadastroSites = new javax.swing.JMenuItem();
         mmCadastrarTermos = new javax.swing.JMenuItem();
@@ -36,12 +35,10 @@ public class formRssFind extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         mmEditarSites = new javax.swing.JMenuItem();
         mmEditarTemros = new javax.swing.JMenuItem();
+        mmEditarHorario = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
-
-        mmSair.setText("Sair");
-        jMenuBar1.add(mmSair);
 
         mmCadastrar.setText("Cadastrar");
 
@@ -63,6 +60,9 @@ public class formRssFind extends javax.swing.JFrame {
 
         mmEditarTemros.setText("Termos");
         jMenu1.add(mmEditarTemros);
+
+        mmEditarHorario.setText("Horário");
+        jMenu1.add(mmEditarHorario);
 
         jMenuBar1.add(jMenu1);
 
@@ -95,8 +95,8 @@ public class formRssFind extends javax.swing.JFrame {
     public javax.swing.JMenuItem mmCadastrarTermos;
     public javax.swing.JMenuItem mmCadastroHorario;
     public javax.swing.JMenuItem mmCadastroSites;
+    public javax.swing.JMenuItem mmEditarHorario;
     public javax.swing.JMenuItem mmEditarSites;
     public javax.swing.JMenuItem mmEditarTemros;
-    public javax.swing.JMenu mmSair;
     // End of variables declaration//GEN-END:variables
 }
