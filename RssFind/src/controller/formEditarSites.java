@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import model.Site;
 
 /**
  *
@@ -25,13 +26,13 @@ public class formEditarSites {
 
     private view.ModelSites TableModel = null;
     private view.formEditarSites tela = null;
-    private ArrayList<String> ListaSites = null;
+    private ArrayList<Site> ListaSites = null;
     private sqlite.Conection banco = null;
     private String urlAtual = "";
 
     public formEditarSites() throws IOException {
         tela = new view.formEditarSites(null, true);
-        ListaSites = new ArrayList<String>();
+        ListaSites = new ArrayList<Site>();
         TableModel = new view.ModelSites();
         tela.tableSites.setModel(TableModel);
         banco = new sqlite.Conection();
@@ -42,9 +43,9 @@ public class formEditarSites {
     private void mouseCliqueTable() {
 
         int Posicao = tela.tableSites.getSelectedRow();
-        String url = TableModel.GetPosition(Posicao);
-        urlAtual = url;
-        tela.edUrl.setText(url);
+        Site url = TableModel.GetPosition(Posicao);
+        urlAtual = url.getUrl();
+        tela.edUrl.setText(urlAtual);
 
     }
 
@@ -129,14 +130,16 @@ public class formEditarSites {
     private void CarregaTableModel() throws FileNotFoundException, IOException {
         ListaSites.clear();
         TableModel.Limpar();
-        ArrayList<URL> listaUrl = banco.getListaUrl();
+        ArrayList<String> listaSiteString = banco.getListaUrlString();
 
-        for (URL listaUrl1 : listaUrl) {
-            ListaSites.add(String.valueOf(listaUrl1));
-        }
-
-        for (int i = 0; i < ListaSites.size(); i++) {
-            TableModel.AddSite(ListaSites.get(i));
+        for (int i = 0; i < listaSiteString.size(); i++) {
+            Site site = new Site();
+            String siteCompleto = listaSiteString.get(i);
+            String[] objeto = siteCompleto.split("#");
+            site.setId(Integer.parseInt(objeto[0]));
+            site.setUrl(objeto[1]);
+            ListaSites.add(site);
+            TableModel.AddSite(site);
         }
 
     }

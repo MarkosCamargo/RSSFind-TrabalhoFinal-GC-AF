@@ -118,7 +118,7 @@ public class Conection implements ConectionSQLite {
     }
 
     @Override
-    public ArrayList<String> getTermos() {
+    public ArrayList<String> getListaTermos() {
         ArrayList<String> lista = new ArrayList<>();
         Statement comando;
         try {
@@ -137,14 +137,14 @@ public class Conection implements ConectionSQLite {
     }
 
     @Override
-    public ArrayList<String> getHorarios() {
+    public ArrayList<String> getListaHorarios() {
         ArrayList<String> lista = new ArrayList<>();
         Statement comando;
         try {
             comando = getConection().createStatement();
             ResultSet resultado = comando.executeQuery("select ID, Horario from Horario");
             while (resultado.next()) {
-                String objetoHorario = resultado.getInt("ID")+"#"+resultado.getString("Horario");
+                String objetoHorario = resultado.getInt("ID") + "#" + resultado.getString("Horario");
                 lista.add(objetoHorario);
             }
         } catch (SQLException ex) {
@@ -254,13 +254,33 @@ public class Conection implements ConectionSQLite {
     public void setUpdateHorario(int id, String novoHorario) {
         try {
             Statement comando = getConection().createStatement();
-            comando.executeUpdate("update Horario set Horario = \""+novoHorario+"\" where ID = "+id+"");
+            comando.executeUpdate("update Horario set Horario = \"" + novoHorario + "\" where ID = " + id + "");
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, Conection.class.getName());
         } finally {
             FecharConexao();
         }
+    }
+
+    @Override
+    public ArrayList<String> getListaUrlString() {
+        ArrayList<String> lista = new ArrayList<>();
+        Statement comando;
+        try {
+            comando = getConection().createStatement();
+            ResultSet resultado = comando.executeQuery("select ID,Url from Site");
+            while (resultado.next()) {
+                String objeto = resultado.getInt("ID") + "#" + resultado.getString("Url");
+                lista.add(objeto);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Conection.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            FecharConexao();
+        }
+
+        return lista;
     }
 
 }

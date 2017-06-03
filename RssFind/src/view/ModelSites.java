@@ -7,6 +7,7 @@ package view;
 
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
+import model.Site;
 
 /**
  *
@@ -14,14 +15,14 @@ import javax.swing.table.AbstractTableModel;
  */
 public class ModelSites extends AbstractTableModel {
 
-    private ArrayList<String> listaSites = null;
+    private ArrayList<Site> listaSites = null;
 
     public ModelSites() {
-        listaSites = new ArrayList<String>();
+        listaSites = new ArrayList<Site>();
 
     }
 
-    public void AddSite(String Objeto) {
+    public void AddSite(Site Objeto) {
         listaSites.add(Objeto);
         fireTableRowsInserted(listaSites.size() - 1, listaSites.size() - 1);
     }
@@ -30,7 +31,7 @@ public class ModelSites extends AbstractTableModel {
         listaSites.clear();
     }
 
-    public String GetPosition(int posicao) {
+    public Site GetPosition(int posicao) {
         return listaSites.get(posicao);
 
     }
@@ -52,10 +53,10 @@ public class ModelSites extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        String site = listaSites.get(rowIndex);
+        Site site = listaSites.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return site;
+                return site.getUrl();
         }
 
         return null;
@@ -66,7 +67,7 @@ public class ModelSites extends AbstractTableModel {
     public String getColumnName(int column) {
         switch (column) {
             case 0:
-                return "Site";
+                return "Url";
         }
 
         return "";

@@ -24,8 +24,9 @@ public interface ConectionSQLite {
     public void setInsertHorario(String horario);
     public void setInsertTermos(String termo);
     public ArrayList<URL> getListaUrl();
-    public ArrayList<String> getTermos();
-    public ArrayList<String> getHorarios();
+    public ArrayList<String> getListaUrlString();
+    public ArrayList<String> getListaTermos();
+    public ArrayList<String> getListaHorarios();
     public String getRegistroString(String script, String coluna);
     
     

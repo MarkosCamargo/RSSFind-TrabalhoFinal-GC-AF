@@ -143,7 +143,7 @@ public class formEditarHorario {
     private void CarregaTableModel() throws FileNotFoundException, IOException {
         ListaHorario.clear();
         TableModel.Limpar();
-        ArrayList<String> listaHorariosString = banco.getHorarios();
+        ArrayList<String> listaHorariosString = banco.getListaHorarios();
 
         for (int i = 0; i < listaHorariosString.size(); i++) {
             Horario horario = new Horario();

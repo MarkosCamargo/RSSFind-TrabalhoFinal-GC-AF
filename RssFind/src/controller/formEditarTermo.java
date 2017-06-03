@@ -128,7 +128,7 @@ public class formEditarTermo {
     private void CarregaTableModel() throws FileNotFoundException, IOException {
         ListaTermos.clear();
         TableModel.Limpar();
-        ListaTermos = banco.getTermos();
+        ListaTermos = banco.getListaTermos();
 
         for (int i = 0; i < ListaTermos.size(); i++) {
             TableModel.AddTermo(ListaTermos.get(i));
