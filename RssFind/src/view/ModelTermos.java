@@ -7,6 +7,7 @@ package view;
 
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
+import model.Termo;
 
 /**
  *
@@ -14,14 +15,14 @@ import javax.swing.table.AbstractTableModel;
  */
 public class ModelTermos extends AbstractTableModel {
 
-    private ArrayList<String> listaTermos = null;
+    private ArrayList<Termo> listaTermos = null;
 
     public ModelTermos() {
-        listaTermos = new ArrayList<String>();
+        listaTermos = new ArrayList<Termo>();
 
     }
 
-    public void AddTermo(String Objeto) {
+    public void AddTermo(Termo Objeto) {
         listaTermos.add(Objeto);
         fireTableRowsInserted(listaTermos.size() - 1, listaTermos.size() - 1);
     }
@@ -30,7 +31,7 @@ public class ModelTermos extends AbstractTableModel {
         listaTermos.clear();
     }
 
-    public String GetPosition(int posicao) {
+    public Termo GetPosition(int posicao) {
         return listaTermos.get(posicao);
 
     }
@@ -52,10 +53,10 @@ public class ModelTermos extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        String termo = listaTermos.get(rowIndex);
+        Termo termo = listaTermos.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return termo;
+                return termo.getPalavra();
         }
 
         return null;

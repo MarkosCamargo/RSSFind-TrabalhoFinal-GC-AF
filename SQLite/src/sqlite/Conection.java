@@ -123,9 +123,11 @@ public class Conection implements ConectionSQLite {
         Statement comando;
         try {
             comando = getConection().createStatement();
-            ResultSet resultado = comando.executeQuery("select palavra from Termo");
+            ResultSet resultado = comando.executeQuery("select ID, palavra from Termo");
             while (resultado.next()) {
-                lista.add(resultado.getString("palavra"));
+                String objeto = resultado.getInt("ID") + "#" + resultado.getString("palavra");
+
+                lista.add(objeto);
             }
         } catch (SQLException ex) {
             Logger.getLogger(Conection.class.getName()).log(Level.SEVERE, null, ex);
@@ -227,7 +229,7 @@ public class Conection implements ConectionSQLite {
     public void setUpdateUrl(int id, String novaUrl) {
         try {
             Statement comando = getConection().createStatement();
-            comando.executeUpdate("update site set Url = \"" + novaUrl + "\" where ID = "+id+"");
+            comando.executeUpdate("update site set Url = \"" + novaUrl + "\" where ID = " + id + "");
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, Conection.class.getName());
@@ -238,10 +240,10 @@ public class Conection implements ConectionSQLite {
     }
 
     @Override
-    public void setUpdateTermo(String termoAtual, String novoTermo) {
+    public void setUpdateTermo(int id, String novoTermo) {
         try {
             Statement comando = getConection().createStatement();
-            comando.executeUpdate("update Termo set palavra = \"" + novoTermo + "\" where palavra like '%" + termoAtual + "%'");
+            comando.executeUpdate("update Termo set palavra = \"" + novoTermo + "\" where ID = "+id+" ");
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, Conection.class.getName());

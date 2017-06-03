@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import model.Termo;
 
 /**
  *
@@ -24,13 +25,14 @@ public class formEditarTermo {
 
     private view.ModelTermos TableModel = null;
     private view.formEditarTermos tela = null;
-    private ArrayList<String> ListaTermos = null;
+    private ArrayList<Termo> ListaTermos = null;
     private sqlite.Conection banco = null;
     private String termoAtual = "";
+    private int idTermo = 0;
 
     public formEditarTermo() throws IOException {
         tela = new view.formEditarTermos(null, true);
-        ListaTermos = new ArrayList<String>();
+        ListaTermos = new ArrayList<Termo>();
         TableModel = new view.ModelTermos();
         tela.tableTermos.setModel(TableModel);
         banco = new sqlite.Conection();
@@ -41,9 +43,10 @@ public class formEditarTermo {
     private void mouseCliqueTable() {
 
         int Posicao = tela.tableTermos.getSelectedRow();
-        String termo = TableModel.GetPosition(Posicao);
-        termoAtual = termo;
-        tela.edTermo.setText(termo);
+        Termo termo = TableModel.GetPosition(Posicao);
+        idTermo = termo.getId();
+        termoAtual = termo.getPalavra();
+        tela.edTermo.setText(termoAtual);
 
     }
 
@@ -56,7 +59,7 @@ public class formEditarTermo {
         if (novoTermo.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Obrigatório informar o novo termo para alterar.");
         } else if (!novoTermo.equalsIgnoreCase(termoAtual)) {
-            banco.setUpdateTermo(termoAtual, novoTermo);
+            banco.setUpdateTermo(idTermo, novoTermo);
             CarregaTableModel();
             JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
             limparTela();
@@ -128,10 +131,16 @@ public class formEditarTermo {
     private void CarregaTableModel() throws FileNotFoundException, IOException {
         ListaTermos.clear();
         TableModel.Limpar();
-        ListaTermos = banco.getListaTermos();
+        ArrayList<String> listaTermoString = banco.getListaTermos();
 
-        for (int i = 0; i < ListaTermos.size(); i++) {
-            TableModel.AddTermo(ListaTermos.get(i));
+        for (int i = 0; i < listaTermoString.size(); i++) {
+            Termo termo = new Termo();
+            String termoCompleto = listaTermoString.get(i);
+            String[] objeto = termoCompleto.split("#");
+            termo.setId(Integer.parseInt(objeto[0]));
+            termo.setPalavra(objeto[1]);
+            ListaTermos.add(termo);
+            TableModel.AddTermo(termo);
         }
 
     }
