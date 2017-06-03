@@ -7,6 +7,7 @@ package view;
 
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
+import model.Horario;
 
 /**
  *
@@ -14,14 +15,14 @@ import javax.swing.table.AbstractTableModel;
  */
 public class ModelHorario extends AbstractTableModel{
     
-     private ArrayList<String> listaHorario = null;
+     private ArrayList<Horario> listaHorario = null;
 
     public ModelHorario() {
-        listaHorario = new ArrayList<String>();
+        listaHorario = new ArrayList<Horario>();
 
     }
 
-    public void AddHorario(String Objeto) {
+    public void AddHorario(Horario Objeto) {
         listaHorario.add(Objeto);
         fireTableRowsInserted(listaHorario.size() - 1, listaHorario.size() - 1);
     }
@@ -30,7 +31,7 @@ public class ModelHorario extends AbstractTableModel{
         listaHorario.clear();
     }
 
-    public String GetPosition(int posicao) {
+    public Horario GetPosition(int posicao) {
         return listaHorario.get(posicao);
 
     }
@@ -52,10 +53,10 @@ public class ModelHorario extends AbstractTableModel{
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        String Horario = listaHorario.get(rowIndex);
+        Horario horario = listaHorario.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return Horario;
+                return horario.getHorario();
         }
 
         return null;

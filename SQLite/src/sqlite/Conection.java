@@ -142,9 +142,10 @@ public class Conection implements ConectionSQLite {
         Statement comando;
         try {
             comando = getConection().createStatement();
-            ResultSet resultado = comando.executeQuery("select Horario from Horario");
+            ResultSet resultado = comando.executeQuery("select ID, Horario from Horario");
             while (resultado.next()) {
-                lista.add(resultado.getString("Horario"));
+                String objetoHorario = resultado.getInt("ID")+"#"+resultado.getString("Horario");
+                lista.add(objetoHorario);
             }
         } catch (SQLException ex) {
             Logger.getLogger(Conection.class.getName()).log(Level.SEVERE, null, ex);
@@ -156,12 +157,12 @@ public class Conection implements ConectionSQLite {
     }
 
     @Override
-    public String getRegistroString(String Script, String coluna) {
+    public String getRegistroString(String script, String coluna) {
         String colunaRetorno = "";
         Statement comando;
         try {
             comando = getConection().createStatement();
-            ResultSet resultado = comando.executeQuery(Script);
+            ResultSet resultado = comando.executeQuery(script);
             if (resultado.next()) {
                 colunaRetorno = resultado.getString(coluna);
             }
@@ -175,10 +176,10 @@ public class Conection implements ConectionSQLite {
     }
 
     @Override
-    public void setInsertUrl(String Url) {
+    public void setInsertUrl(String url) {
         try {
             Statement comando = getConection().createStatement();
-            comando.executeUpdate("insert into Site(Url) values(\"" + Url + "\")");
+            comando.executeUpdate("insert into Site(Url) values(\"" + url + "\")");
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, Conection.class.getName());
@@ -197,10 +198,10 @@ public class Conection implements ConectionSQLite {
     }
 
     @Override
-    public void setInsertTermos(String Termo) {
+    public void setInsertTermos(String termo) {
         try {
             Statement comando = getConection().createStatement();
-            comando.executeUpdate("insert into Termo(palavra) values(\"" + Termo + "\")");
+            comando.executeUpdate("insert into Termo(palavra) values(\"" + termo + "\")");
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, Conection.class.getName());
@@ -223,10 +224,10 @@ public class Conection implements ConectionSQLite {
     }
 
     @Override
-    public void setUpdateUrl(String UrlAtual, String novaUrl) {
+    public void setUpdateUrl(String urlAtual, String novaUrl) {
         try {
             Statement comando = getConection().createStatement();
-            comando.executeUpdate("update site set Url = \"" + novaUrl + "\" where Url like '%" + UrlAtual + "%'");
+            comando.executeUpdate("update site set Url = \"" + novaUrl + "\" where Url like '%" + urlAtual + "%'");
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, Conection.class.getName());
@@ -241,6 +242,19 @@ public class Conection implements ConectionSQLite {
         try {
             Statement comando = getConection().createStatement();
             comando.executeUpdate("update Termo set palavra = \"" + novoTermo + "\" where palavra like '%" + termoAtual + "%'");
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, Conection.class.getName());
+        } finally {
+            FecharConexao();
+        }
+    }
+
+    @Override
+    public void setUpdateHorario(int id, String novoHorario) {
+        try {
+            Statement comando = getConection().createStatement();
+            comando.executeUpdate("update Horario set Horario = \""+novoHorario+"\" where ID = "+id+"");
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, Conection.class.getName());
