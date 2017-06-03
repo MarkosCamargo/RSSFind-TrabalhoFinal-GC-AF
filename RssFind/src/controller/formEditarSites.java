@@ -11,7 +11,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,6 +28,7 @@ public class formEditarSites {
     private ArrayList<Site> ListaSites = null;
     private sqlite.Conection banco = null;
     private String urlAtual = "";
+    private int idSite= 0;
 
     public formEditarSites() throws IOException {
         tela = new view.formEditarSites(null, true);
@@ -44,6 +44,7 @@ public class formEditarSites {
 
         int Posicao = tela.tableSites.getSelectedRow();
         Site url = TableModel.GetPosition(Posicao);
+        idSite = url.getId();
         urlAtual = url.getUrl();
         tela.edUrl.setText(urlAtual);
 
@@ -58,7 +59,7 @@ public class formEditarSites {
         if (novaUrl.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Obrigatório informar a nova URL para alterar.");
         } else if (!novaUrl.equalsIgnoreCase(urlAtual)) {
-            banco.setUpdateUrl(urlAtual, novaUrl);
+            banco.setUpdateUrl(idSite, novaUrl);
             CarregaTableModel();
             JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
             limparTela();

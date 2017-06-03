@@ -18,7 +18,7 @@ public interface ConectionSQLite {
     public void setInsert(String script);
     public void setDelete(String script);
     public void setInsertUrl(String url);
-    public void setUpdateUrl(String urlAtual, String novaUrl);
+    public void setUpdateUrl(int id, String novaUrl);
     public void setUpdateTermo(String termoAtual, String novoTermo);
     public void setUpdateHorario(int id, String novoHorario);
     public void setInsertHorario(String horario);

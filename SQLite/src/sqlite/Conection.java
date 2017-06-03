@@ -224,10 +224,10 @@ public class Conection implements ConectionSQLite {
     }
 
     @Override
-    public void setUpdateUrl(String urlAtual, String novaUrl) {
+    public void setUpdateUrl(int id, String novaUrl) {
         try {
             Statement comando = getConection().createStatement();
-            comando.executeUpdate("update site set Url = \"" + novaUrl + "\" where Url like '%" + urlAtual + "%'");
+            comando.executeUpdate("update site set Url = \"" + novaUrl + "\" where ID = "+id+"");
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, Conection.class.getName());
