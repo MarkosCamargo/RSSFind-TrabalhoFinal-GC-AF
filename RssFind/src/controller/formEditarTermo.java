@@ -55,18 +55,50 @@ public class formEditarTermo {
     }
 
     private void alterar() throws IOException {
-        String novoTermo = tela.edTermo.getText();
-        if (novoTermo.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Obrigatório informar o novo termo para alterar.");
-        } else if (!novoTermo.equalsIgnoreCase(termoAtual)) {
-            banco.setUpdateTermo(idTermo, novoTermo);
-            CarregaTableModel();
-            JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
-            limparTela();
+        if (ListaTermos.size() < 1) {
+            JOptionPane.showMessageDialog(null, "Nenhum registro gravado para alterar.");
+        } else {
+            String novoTermo = tela.edTermo.getText();
+            if (novoTermo.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Obrigatório informar o novo termo para alterar.");
+            } else if (!novoTermo.equalsIgnoreCase(termoAtual)) {
+                banco.setUpdateTermo(idTermo, novoTermo);
+                CarregaTableModel();
+                JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
+                limparTela();
+            }
+        }
+    }
+
+    private void excluir() throws IOException {
+        if (ListaTermos.size() < 1) {
+            JOptionPane.showMessageDialog(null, "Nenhum registro gravado para excluir.");
+        } else {
+
+            if (tela.edTermo.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Obrigatório Selecionar Termo para excluir.");
+            } else {
+                banco.setDeleteTermos(idTermo);
+                CarregaTableModel();
+                JOptionPane.showMessageDialog(null, "Excluido com sucesso!");
+                limparTela();
+            }
         }
     }
 
     private void ligaEventos() throws IOException {
+
+        tela.btnExcluir.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    excluir();
+                } catch (IOException ex) {
+                    Logger.getLogger(formEditarTermo.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
 
         tela.btnAlterar.addActionListener(new ActionListener() {
 

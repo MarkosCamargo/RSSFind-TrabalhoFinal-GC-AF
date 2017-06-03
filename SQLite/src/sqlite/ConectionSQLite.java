@@ -16,13 +16,18 @@ public interface ConectionSQLite {
     
     public void setUpdate(String script);
     public void setInsert(String script);
-    public void setDelete(String script);
-    public void setInsertUrl(String url);
+    public void setDelete(String script);    
+    
+    public void setDeleteTermos(int id);
+    
     public void setUpdateUrl(int id, String novaUrl);
     public void setUpdateTermo(int id, String novoTermo);
     public void setUpdateHorario(int id, String novoHorario);
+    
+    public void setInsertUrl(String url);
     public void setInsertHorario(String horario);
     public void setInsertTermos(String termo);
+    
     public ArrayList<URL> getListaUrl();
     public ArrayList<String> getListaUrlString();
     public ArrayList<String> getListaTermos();

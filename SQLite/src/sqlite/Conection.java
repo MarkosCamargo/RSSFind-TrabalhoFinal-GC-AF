@@ -243,7 +243,7 @@ public class Conection implements ConectionSQLite {
     public void setUpdateTermo(int id, String novoTermo) {
         try {
             Statement comando = getConection().createStatement();
-            comando.executeUpdate("update Termo set palavra = \"" + novoTermo + "\" where ID = "+id+" ");
+            comando.executeUpdate("update Termo set palavra = \"" + novoTermo + "\" where ID = " + id + " ");
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, Conection.class.getName());
@@ -283,6 +283,19 @@ public class Conection implements ConectionSQLite {
         }
 
         return lista;
+    }
+
+    @Override
+    public void setDeleteTermos(int id) {
+        try {
+            Statement comando = getConection().createStatement();
+            comando.executeUpdate("Delete from Termo where ID = " + id + "");
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, Conection.class.getName());
+        } finally {
+            FecharConexao();
+        }
     }
 
 }
