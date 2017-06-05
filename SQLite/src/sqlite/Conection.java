@@ -61,7 +61,7 @@ public class Conection implements ConectionSQLite {
                     + "CREATE  TABLE  IF NOT EXISTS \"Site\" (\"ID\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , \"Url\" VARCHAR); \n"
                     + "CREATE  TABLE  IF NOT EXISTS \"Horario\" (\"ID\" INTEGER PRIMARY KEY  NOT NULL  UNIQUE , \"Horario\" VARCHAR); \n"
                     + "CREATE  TABLE  IF NOT EXISTS \"Email\" (\"ID\" INTEGER PRIMARY KEY  NOT NULL  UNIQUE , \"Email\" VARCHAR NOT NULL , \"Senha\" VARCHAR); \n"
-                    + "CREATE  TABLE  IF NOT EXISTS \"Noticia\" (\"ID\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , \"Titulo\" VARCHAR, \"Link\" VARCHAR); \n";                    
+                    + "CREATE  TABLE  IF NOT EXISTS \"Noticia\" (\"ID\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , \"Titulo\" VARCHAR, \"Link\" VARCHAR); \n";
 
             comando.executeUpdate(script);
         } catch (SQLException ex) {
@@ -316,6 +316,19 @@ public class Conection implements ConectionSQLite {
         try {
             Statement comando = getConection().createStatement();
             comando.executeUpdate("Delete from Site where ID = " + id + "");
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, Conection.class.getName());
+        } finally {
+            FecharConexao();
+        }
+    }
+
+    @Override
+    public void setInsertNoticiaEncontrada(String titulo, String link) {
+        try {
+            Statement comando = getConection().createStatement();
+            comando.executeUpdate("insert into Noticia(Titulo, Link) values(\""+titulo+"\", \""+link+"\")");
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, Conection.class.getName());
