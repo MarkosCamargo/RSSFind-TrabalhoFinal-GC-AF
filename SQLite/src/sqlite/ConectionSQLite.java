@@ -19,6 +19,8 @@ public interface ConectionSQLite {
     public void setDelete(String script);    
     
     public void setDeleteTermos(int id);
+    public void setDeleteHorario(int id);
+    public void setDeleteUrl(int id);
     
     public void setUpdateUrl(int id, String novaUrl);
     public void setUpdateTermo(int id, String novoTermo);

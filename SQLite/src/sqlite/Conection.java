@@ -298,4 +298,30 @@ public class Conection implements ConectionSQLite {
         }
     }
 
+    @Override
+    public void setDeleteHorario(int id) {
+        try {
+            Statement comando = getConection().createStatement();
+            comando.executeUpdate("Delete from Termo where ID = " + id + "");
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, Conection.class.getName());
+        } finally {
+            FecharConexao();
+        }
+    }
+
+    @Override
+    public void setDeleteUrl(int id) {
+        try {
+            Statement comando = getConection().createStatement();
+            comando.executeUpdate("Delete from Site where ID = " + id + "");
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, Conection.class.getName());
+        } finally {
+            FecharConexao();
+        }
+    }
+
 }

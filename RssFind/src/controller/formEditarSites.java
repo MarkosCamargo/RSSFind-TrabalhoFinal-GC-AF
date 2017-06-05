@@ -25,14 +25,14 @@ public class formEditarSites {
 
     private view.ModelSites TableModel = null;
     private view.formEditarSites tela = null;
-    private ArrayList<Site> ListaSites = null;
+    private ArrayList<Site> listaSites = null;
     private sqlite.Conection banco = null;
     private String urlAtual = "";
-    private int idSite= 0;
+    private int idSite = 0;
 
     public formEditarSites() throws IOException {
         tela = new view.formEditarSites(null, true);
-        ListaSites = new ArrayList<Site>();
+        listaSites = new ArrayList<Site>();
         TableModel = new view.ModelSites();
         tela.tableSites.setModel(TableModel);
         banco = new sqlite.Conection();
@@ -66,7 +66,35 @@ public class formEditarSites {
         }
     }
 
+    private void excluir() throws IOException {
+        if (listaSites.size() < 1) {
+            JOptionPane.showMessageDialog(null, "Nenhum registro gravado para excluir.");
+        } else {
+
+            if (tela.edUrl.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Obrigatório Selecionar Site para excluir.");
+            } else {
+                banco.setDeleteUrl(idSite);
+                CarregaTableModel();
+                JOptionPane.showMessageDialog(null, "Excluido com sucesso!");
+                limparTela();
+            }
+        }
+    }
+
     private void ligaEventos() throws IOException {
+
+        tela.btnExcluir.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    excluir();
+                } catch (IOException ex) {
+                    Logger.getLogger(formEditarSites.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
 
         tela.btnAlterar.addActionListener(new ActionListener() {
 
@@ -129,7 +157,7 @@ public class formEditarSites {
     }
 
     private void CarregaTableModel() throws FileNotFoundException, IOException {
-        ListaSites.clear();
+        listaSites.clear();
         TableModel.Limpar();
         ArrayList<String> listaSiteString = banco.getListaUrlString();
 
@@ -139,7 +167,7 @@ public class formEditarSites {
             String[] objeto = siteCompleto.split("#");
             site.setId(Integer.parseInt(objeto[0]));
             site.setUrl(objeto[1]);
-            ListaSites.add(site);
+            listaSites.add(site);
             TableModel.AddSite(site);
         }
 
