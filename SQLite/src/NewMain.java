@@ -13,9 +13,7 @@ import sqlite.Conection;
 public class NewMain {
 
     public static void main(String[] args) {        
-        Conection teste = new Conection();
-        teste.setInsertUrl("Perrereca");
-                
+        Conection teste = new Conection();                    
 
     }
 

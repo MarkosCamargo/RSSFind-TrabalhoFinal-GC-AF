@@ -61,7 +61,7 @@ public class Conection implements ConectionSQLite {
                     + "CREATE  TABLE  IF NOT EXISTS \"Site\" (\"ID\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , \"Url\" VARCHAR); \n"
                     + "CREATE  TABLE  IF NOT EXISTS \"Horario\" (\"ID\" INTEGER PRIMARY KEY  NOT NULL  UNIQUE , \"Horario\" VARCHAR); \n"
                     + "CREATE  TABLE  IF NOT EXISTS \"Email\" (\"ID\" INTEGER PRIMARY KEY  NOT NULL  UNIQUE , \"Email\" VARCHAR NOT NULL , \"Senha\" VARCHAR); \n"
-                    + "CREATE  TABLE  IF NOT EXISTS \"Noticia\" (\"ID\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , \"Titulo\" VARCHAR, \"Link\" VARCHAR, \"Noticia\" VARCHAR);";
+                    + "CREATE  TABLE  IF NOT EXISTS \"Noticia\" (\"ID\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , \"Titulo\" VARCHAR, \"Link\" VARCHAR); \n";                    
 
             comando.executeUpdate(script);
         } catch (SQLException ex) {
