@@ -328,13 +328,33 @@ public class Conection implements ConectionSQLite {
     public void setInsertNoticiaEncontrada(String titulo, String link) {
         try {
             Statement comando = getConection().createStatement();
-            comando.executeUpdate("insert into Noticia(Titulo, Link) values(\""+titulo+"\", \""+link+"\")");
+            comando.executeUpdate("insert into Noticia(Titulo, Link) values(\"" + titulo + "\", \"" + link + "\")");
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, Conection.class.getName());
         } finally {
             FecharConexao();
         }
+    }
+
+    @Override
+    public ArrayList<String> getListaNoticiasEncontradas() {
+        ArrayList<String> lista = new ArrayList<>();
+        Statement comando;
+        try {
+            comando = getConection().createStatement();
+            ResultSet resultado = comando.executeQuery("select ID, Titulo, Link from Noticia");
+            while (resultado.next()) {
+                String objeto = resultado.getInt("ID") + "#" + resultado.getString("Titulo") + "#" + resultado.getString("Link");
+                lista.add(objeto);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Conection.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            FecharConexao();
+        }
+
+        return lista;
     }
 
 }

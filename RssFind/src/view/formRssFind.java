@@ -36,6 +36,7 @@ public class formRssFind extends javax.swing.JFrame {
         mmEditarSites = new javax.swing.JMenuItem();
         mmEditarTemros = new javax.swing.JMenuItem();
         mmEditarHorario = new javax.swing.JMenuItem();
+        mmEditarNoticias = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -63,6 +64,9 @@ public class formRssFind extends javax.swing.JFrame {
 
         mmEditarHorario.setText("Horário");
         jMenu1.add(mmEditarHorario);
+
+        mmEditarNoticias.setText("Notícias");
+        jMenu1.add(mmEditarNoticias);
 
         jMenuBar1.add(jMenu1);
 
@@ -96,6 +100,7 @@ public class formRssFind extends javax.swing.JFrame {
     public javax.swing.JMenuItem mmCadastroHorario;
     public javax.swing.JMenuItem mmCadastroSites;
     public javax.swing.JMenuItem mmEditarHorario;
+    public javax.swing.JMenuItem mmEditarNoticias;
     public javax.swing.JMenuItem mmEditarSites;
     public javax.swing.JMenuItem mmEditarTemros;
     // End of variables declaration//GEN-END:variables
