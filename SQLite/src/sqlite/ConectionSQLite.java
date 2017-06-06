@@ -21,6 +21,7 @@ public interface ConectionSQLite {
     public void setDeleteTermos(int id);
     public void setDeleteHorario(int id);
     public void setDeleteUrl(int id);
+    public void setDeleteNoticia(int id);    
     
     public void setUpdateUrl(int id, String novaUrl);
     public void setUpdateTermo(int id, String novoTermo);
@@ -29,8 +30,7 @@ public interface ConectionSQLite {
     public void setInsertUrl(String url);
     public void setInsertHorario(String horario);
     public void setInsertTermos(String termo);
-    public void setInsertNoticiaEncontrada(String titulo, String link);
-    
+    public void setInsertNoticiaEncontrada(String titulo, String link);    
     
     public ArrayList<URL> getListaUrl();
     public ArrayList<String> getListaUrlString();

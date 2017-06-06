@@ -12,6 +12,9 @@ import java.awt.event.MouseListener;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import model.Noticia;
 
 /**
@@ -19,13 +22,12 @@ import model.Noticia;
  * @author Matrix
  */
 public class formEditarNoticias {
-    
+
     private view.ModelNoticias TableModel = null;
     private view.formEditarNoticiasEncontradas tela = null;
     private ArrayList<Noticia> listaNoticias = null;
     private sqlite.Conection banco = null;
     private int idNoticia = 0;
-    
 
     public formEditarNoticias() throws IOException {
         tela = new view.formEditarNoticiasEncontradas(null, true);
@@ -41,16 +43,44 @@ public class formEditarNoticias {
 
         int Posicao = tela.tableNoticias.getSelectedRow();
         Noticia not = TableModel.GetPosition(Posicao);
-        idNoticia = not.getId();       
+        idNoticia = not.getId();
 
     }
 
     private void sair() {
         tela.setVisible(false);
-    }  
+    }
+
+    private void excluir() throws IOException {
+        if (listaNoticias.size() < 1) {
+            JOptionPane.showMessageDialog(null, "Nenhum registro gravado para excluir.");
+        } else if (idNoticia == 0) {
+            JOptionPane.showMessageDialog(null, "Necessário selecionar uma notícia para excluir");
+        } else {
+
+            if ((JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir?")) == 0) {
+                banco.setDeleteNoticia(idNoticia);
+                CarregaTableModel();
+                idNoticia = 0;
+                JOptionPane.showMessageDialog(null, "Excluido com sucesso!");
+            }
+
+        }
+    }
 
     private void ligaEventos() throws IOException {
 
+        tela.btnExcluir.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    excluir();
+                } catch (IOException ex) {
+                    Logger.getLogger(formEditarTermo.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
 
         tela.btnSair.addActionListener(new ActionListener() {
 
@@ -90,7 +120,7 @@ public class formEditarNoticias {
 
     }
 
-    public void chamaTelaEditarNoticias() throws IOException {       
+    public void chamaTelaEditarNoticias() throws IOException {
         CarregaTableModel();
         tela.setVisible(true);
     }
@@ -112,5 +142,5 @@ public class formEditarNoticias {
         }
 
     }
-    
+
 }

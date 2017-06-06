@@ -357,4 +357,17 @@ public class Conection implements ConectionSQLite {
         return lista;
     }
 
+    @Override
+    public void setDeleteNoticia(int id) {
+        try {
+            Statement comando = getConection().createStatement();
+            comando.executeUpdate("Delete from Noticia where ID = " + id + "");
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, Conection.class.getName());
+        } finally {
+            FecharConexao();
+        }
+    }
+
 }
