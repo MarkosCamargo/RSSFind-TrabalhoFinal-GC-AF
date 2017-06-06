@@ -23,7 +23,7 @@ public class Test {
 
     public static void main(String[] args) {
         //BANCO DE DADOS
-//        Conection conn = new Conection();
+        Conection conn = new Conection();
 //        conn.setDelete("drop table Site");
 //        conn.setDelete("drop table Termo");
 //        conn.setDelete("drop table Noticia");
@@ -41,11 +41,16 @@ public class Test {
             System.out.println("Title: " + noticiasEncontrada.getTitulo() + "\nDesc: " + noticiasEncontrada.getNoticia() + "\n");
             msgSendEmail = msgSendEmail + noticiasEncontrada.getTitulo() + "  -  LINK: " + noticiasEncontrada.getLink() + "\n";
         }
+        //TESTE NOTICIAS ENCONTRADAS
+//        List<String> noticiasEncontradas = conn.getListaNoticiasEncontradas();
+//        for (String noticiasEncontrada : noticiasEncontradas) {
+//            System.out.println(noticiasEncontrada);
+//        }
 
         //TESTE ENVIA EMAIL
-        if (noticiasEncontradas.size() > 0) {
-            IMail i = new ImailImpl();
-            i.sendEmail("markos_camargo@hotmail.com", "suasenha", "markos_camargo@hotmail.com", msgSendEmail);
-        }
+//        if (noticiasEncontradas.size() > 0) {
+//            IMail i = new ImailImpl();
+//            i.sendEmail("markos_camargo@hotmail.com", "suasenha", "markos_camargo@hotmail.com", msgSendEmail);
+//        }
     }
 }
