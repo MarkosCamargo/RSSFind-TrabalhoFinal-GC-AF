@@ -25,6 +25,7 @@ public class formPrincipal {
     controller.formEditarTermo telaEditarTermos = null;
     controller.formEditarHorario telaEditarHorario = null;
     controller.formEditarNoticias telaEditarNoticias = null;
+    controller.formVerificacaoManual telaVerificacaoManual = null;
 
     public formPrincipal() throws IOException {
         formPrincipal = new view.formRssFind();
@@ -35,6 +36,7 @@ public class formPrincipal {
         telaEditarTermos = new controller.formEditarTermo();
         telaEditarHorario = new controller.formEditarHorario();
         telaEditarNoticias = new controller.formEditarNoticias();
+        telaVerificacaoManual = new controller.formVerificacaoManual();
         ligaEventos();
 
     }
@@ -44,6 +46,14 @@ public class formPrincipal {
     }
 
     private void ligaEventos() {
+
+        formPrincipal.mmVerificacaoManual.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                telaVerificacaoManual.chamaTela();
+            }
+        });
 
         formPrincipal.mmEditarNoticias.addActionListener(new ActionListener() {
 
