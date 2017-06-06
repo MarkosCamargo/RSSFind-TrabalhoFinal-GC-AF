@@ -30,7 +30,8 @@ public interface ConectionSQLite {
     public void setInsertUrl(String url);
     public void setInsertHorario(String horario);
     public void setInsertTermos(String termo);
-    public void setInsertNoticiaEncontrada(String titulo, String link);    
+    public void setInsertNoticiaEncontrada(String titulo, String link);  
+    public void setInsertEmail(String email);
     
     public ArrayList<URL> getListaUrl();
     public ArrayList<String> getListaUrlString();
