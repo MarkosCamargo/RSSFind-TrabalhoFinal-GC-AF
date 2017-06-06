@@ -370,4 +370,24 @@ public class Conection implements ConectionSQLite {
         }
     }
 
+    @Override
+    public boolean getNoticiaJaInserida(String titulo) {
+        boolean noticiaJaInserida = false;
+
+        Statement comando;
+        try {
+            comando = getConection().createStatement();
+            ResultSet resultado = comando.executeQuery("SELECT ID FROM Noticia where Titulo like \"" + titulo + "\"");
+            noticiaJaInserida = resultado.next();
+        } catch (SQLException ex) {
+            Logger.getLogger(Conection.class.getName()).log(Level.SEVERE, null, ex);
+            noticiaJaInserida = false;
+        } finally {
+            FecharConexao();
+        }
+
+        return noticiaJaInserida;
+
+    }
+
 }

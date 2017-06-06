@@ -38,6 +38,7 @@ public interface ConectionSQLite {
     public ArrayList<String> getListaHorarios();
     public ArrayList<String> getListaNoticiasEncontradas();
     public String getRegistroString(String script, String coluna);
+    public boolean getNoticiaJaInserida(String titulo);
     
     
 }

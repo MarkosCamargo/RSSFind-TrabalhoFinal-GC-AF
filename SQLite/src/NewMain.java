@@ -13,7 +13,7 @@ import sqlite.Conection;
 public class NewMain {
 
     public static void main(String[] args) {        
-        Conection teste = new Conection();                    
+        Conection teste = new Conection();         
 
     }
 
