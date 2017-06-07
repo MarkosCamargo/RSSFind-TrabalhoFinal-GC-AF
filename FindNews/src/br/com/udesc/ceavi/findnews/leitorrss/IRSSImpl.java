@@ -36,13 +36,6 @@ public class IRSSImpl implements IRSS {
         Conection conn = new Conection();
         List<URL> sites = conn.getListaUrl();
 
-        List<String> noticias1 = conn.getListaNoticiasEncontradas();
-        List<String> noticias2 = new ArrayList<>();
-        for (String palavrasChave : noticias1) {
-            String[] filtro = palavrasChave.split("#");
-            noticias2.add(filtro[1]);
-        }
-
         List<String> palavrasChaves1 = conn.getListaTermos();
         List<String> palavrasChaves = new ArrayList<>();
         for (String palavrasChave : palavrasChaves1) {
@@ -83,11 +76,9 @@ public class IRSSImpl implements IRSS {
                     if (entry.getTitle().contains(chave) || entry.getDescription().getValue().contains(chave)) {
                         try {
                             noticias.add(new Noticia(entry.getTitle(), entry.getDescription().getValue(), new URL(entry.getLink())));
-                            boolean ehNova = false;
-                            for (String string : noticias2) {
-                                if (!entry.getTitle().equalsIgnoreCase(string)) {
-                                    conn.setInsertNoticiaEncontrada(entry.getTitle(), entry.getLink());
-                                }
+
+                            if (!conn.getNoticiaJaInserida(entry.getTitle())) {//se a noticia e nova ele insere
+                                conn.setInsertNoticiaEncontrada(entry.getTitle(), entry.getLink());
                             }
 
                         } catch (MalformedURLException ex) {

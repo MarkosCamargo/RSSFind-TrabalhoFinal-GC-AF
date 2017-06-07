@@ -34,18 +34,18 @@ public class Test {
 //        }
 
         //TESTE VERIFICA SITES MANUAL E MONTA MSG PARA ENVIAR POR EMAIL CASO ENCONTRE ALGO
-        IRSS r = new IRSSImpl();
-        String msgSendEmail = "Foram encontrados noticias interessantes\n\n\n";
-        List<Noticia> noticiasEncontradas = r.verificaNoticiasManual();
-        for (Noticia noticiasEncontrada : noticiasEncontradas) {
-            System.out.println("Title: " + noticiasEncontrada.getTitulo() + "\nDesc: " + noticiasEncontrada.getNoticia() + "\n");
-            msgSendEmail = msgSendEmail + noticiasEncontrada.getTitulo() + "  -  LINK: " + noticiasEncontrada.getLink() + "\n";
-        }
-        //TESTE NOTICIAS ENCONTRADAS
-//        List<String> noticiasEncontradas = conn.getListaNoticiasEncontradas();
-//        for (String noticiasEncontrada : noticiasEncontradas) {
-//            System.out.println(noticiasEncontrada);
+//        IRSS r = new IRSSImpl();
+//        String msgSendEmail = "Foram encontrados noticias interessantes\n\n\n";
+//        List<Noticia> noticiasEncontradas = r.verificaNoticiasManual();
+//        for (Noticia noticiasEncontrada : noticiasEncontradas) {
+//            System.out.println("Title: " + noticiasEncontrada.getTitulo() + "\nDesc: " + noticiasEncontrada.getNoticia() + "\n");
+//            msgSendEmail = msgSendEmail + noticiasEncontrada.getTitulo() + "  -  LINK: " + noticiasEncontrada.getLink() + "\n";
 //        }
+        //TESTE NOTICIAS ENCONTRADAS
+        List<String> noticiasEncontradas = conn.getListaNoticiasEncontradas();
+        for (String noticiasEncontrada : noticiasEncontradas) {
+            System.out.println(noticiasEncontrada);
+        }
 
         //TESTE ENVIA EMAIL
 //        if (noticiasEncontradas.size() > 0) {
