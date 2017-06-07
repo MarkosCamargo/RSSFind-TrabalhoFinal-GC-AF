@@ -38,6 +38,7 @@ public class formRssFind extends javax.swing.JFrame {
         mmEditarTemros = new javax.swing.JMenuItem();
         mmEditarHorario = new javax.swing.JMenuItem();
         mmEditarNoticias = new javax.swing.JMenuItem();
+        mmEditarEmail = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         mmVerificacaoManual = new javax.swing.JMenuItem();
 
@@ -73,6 +74,9 @@ public class formRssFind extends javax.swing.JFrame {
 
         mmEditarNoticias.setText("Notícias");
         jMenu1.add(mmEditarNoticias);
+
+        mmEditarEmail.setText("Email");
+        jMenu1.add(mmEditarEmail);
 
         jMenuBar1.add(jMenu1);
 
@@ -114,6 +118,7 @@ public class formRssFind extends javax.swing.JFrame {
     public javax.swing.JMenuItem mmCadastrarTermos;
     public javax.swing.JMenuItem mmCadastroHorario;
     public javax.swing.JMenuItem mmCadastroSites;
+    public javax.swing.JMenuItem mmEditarEmail;
     public javax.swing.JMenuItem mmEditarHorario;
     public javax.swing.JMenuItem mmEditarNoticias;
     public javax.swing.JMenuItem mmEditarSites;

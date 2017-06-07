@@ -403,4 +403,50 @@ public class Conection implements ConectionSQLite {
         }
     }
 
+    @Override
+    public void setDeleteEmail(int id) {
+        try {
+            Statement comando = getConection().createStatement();
+            comando.executeUpdate("Delete from Email where ID = " + id + "");
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, Conection.class.getName());
+        } finally {
+            FecharConexao();
+        }
+    }
+
+    @Override
+    public void setUpdateEmail(int id, String novoEmail) {
+        try {
+            Statement comando = getConection().createStatement();
+            comando.executeUpdate("update Email set Email = \"" + novoEmail + "\" where ID = " + id + "");
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, Conection.class.getName());
+        } finally {
+            FecharConexao();
+        }
+    }
+
+    @Override
+    public ArrayList<String> getListaEmail() {
+        ArrayList<String> lista = new ArrayList<>();
+        Statement comando;
+        try {
+            comando = getConection().createStatement();
+            ResultSet resultado = comando.executeQuery("select ID,Email from Email");
+            while (resultado.next()) {
+                String objeto = resultado.getInt("ID") + "#" + resultado.getString("Email");
+                lista.add(objeto);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Conection.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            FecharConexao();
+        }
+
+        return lista;
+    }
+
 }
