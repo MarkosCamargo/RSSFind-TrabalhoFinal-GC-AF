@@ -22,10 +22,12 @@ public interface ConectionSQLite {
     public void setDeleteHorario(int id);
     public void setDeleteUrl(int id);
     public void setDeleteNoticia(int id);    
+    public void setDeleteEmail(int id);    
     
     public void setUpdateUrl(int id, String novaUrl);
     public void setUpdateTermo(int id, String novoTermo);
     public void setUpdateHorario(int id, String novoHorario);
+    public void setUpdateEmail(int id, String novoEmail);  
     
     public void setInsertUrl(String url);
     public void setInsertHorario(String horario);
@@ -40,6 +42,7 @@ public interface ConectionSQLite {
     public ArrayList<String> getListaNoticiasEncontradas();
     public String getRegistroString(String script, String coluna);
     public boolean getNoticiaJaInserida(String titulo);
+    public ArrayList<String> getListaEmail();
     
     
 }
