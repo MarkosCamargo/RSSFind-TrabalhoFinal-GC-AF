@@ -12,6 +12,7 @@ package model;
 public class Email {
     private int id;
     private String email;
+    private String senha;
 
     public int getId() {
         return id;

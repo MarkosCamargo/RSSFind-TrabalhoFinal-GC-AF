@@ -27,13 +27,13 @@ public interface ConectionSQLite {
     public void setUpdateUrl(int id, String novaUrl);
     public void setUpdateTermo(int id, String novoTermo);
     public void setUpdateHorario(int id, String novoHorario);
-    public void setUpdateEmail(int id, String novoEmail);  
+    public void setUpdateEmail(int id, String novoEmail, String novaSenha);  
     
     public void setInsertUrl(String url);
     public void setInsertHorario(String horario);
     public void setInsertTermos(String termo);
     public void setInsertNoticiaEncontrada(String titulo, String link);  
-    public void setInsertEmail(String email);
+    public void setInsertEmail(String email, String senha);
     
     public ArrayList<URL> getListaUrl();
     public ArrayList<String> getListaUrlString();

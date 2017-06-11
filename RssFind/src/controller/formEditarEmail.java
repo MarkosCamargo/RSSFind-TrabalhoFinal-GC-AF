@@ -47,7 +47,6 @@ public class formEditarEmail {
         idEmail = email.getId();
         emailAtual = email.getEmail();
         tela.edEmail.setText(emailAtual);
-
     }
 
     private void sair() {
@@ -56,10 +55,11 @@ public class formEditarEmail {
 
     private void alterar() throws IOException {
         String novoEmail = tela.edEmail.getText();
+        String novaSenha = tela.edSenha.getText();
         if (novoEmail.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Obrigatório informar a novo Email para alterar.");
-        } else if (!novoEmail.equalsIgnoreCase(emailAtual)) {
-            banco.setUpdateEmail(idEmail, novoEmail);
+        } else if (!novoEmail.equalsIgnoreCase(emailAtual) || !novaSenha.isEmpty()) {
+            banco.setUpdateEmail(idEmail, novoEmail, novaSenha);
             CarregaTableModel();
             JOptionPane.showMessageDialog(null, "Alterado com sucesso!");
             limparTela();
@@ -148,6 +148,7 @@ public class formEditarEmail {
 
     private void limparTela() {
         tela.edEmail.setText("");
+        tela.edSenha.setText("");
     }
 
     public void chamaTelaEditarEmail() throws IOException {

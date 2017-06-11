@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
  * @author Matrix
  */
 public class formCadastroEmail {
+
     private view.formCadastroEmail telaCadastroEmail = null;
     private sqlite.Conection banco = null;
 
@@ -25,7 +26,7 @@ public class formCadastroEmail {
 
     private void limparTela() {
         telaCadastroEmail.edemail.setText("");
-    
+        telaCadastroEmail.edSenha.setText("");
     }
 
     public void chamaTelaCadastroEmail() {
@@ -33,11 +34,13 @@ public class formCadastroEmail {
         telaCadastroEmail.setVisible(true);
     }
 
-    private void gravarUrl() {
+    private void gravar() {
         if (telaCadastroEmail.edemail.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Obrigatório informar Email.");
+        } else if (telaCadastroEmail.edSenha.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Obrigatório informar Senha.");
         } else {
-            banco.setInsertEmail(telaCadastroEmail.edemail.getText());
+            banco.setInsertEmail(telaCadastroEmail.edemail.getText(), telaCadastroEmail.edSenha.getText());
             JOptionPane.showMessageDialog(null, "Incluido com sucesso.");
             limparTela();
         }
@@ -53,7 +56,7 @@ public class formCadastroEmail {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                gravarUrl();
+                gravar();
             }
         });
 
@@ -74,5 +77,5 @@ public class formCadastroEmail {
         });
 
     }
-    
+
 }

@@ -5,6 +5,8 @@
  */
 package controller;
 
+import br.com.udesc.ceavi.findnews.leitorrss.IRSS;
+import br.com.udesc.ceavi.findnews.leitorrss.IRSSImpl;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -37,7 +39,9 @@ public class formVerificacaoManual {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                IRSSImpl r = new IRSSImpl();
+                r.verificaNoticiasManual();
+ 
             }
         });
 
