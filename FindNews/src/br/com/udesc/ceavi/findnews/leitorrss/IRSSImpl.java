@@ -75,10 +75,11 @@ public class IRSSImpl implements IRSS {
                 for (String chave : palavrasChaves) {
                     if (entry.getTitle().contains(chave) || entry.getDescription().getValue().contains(chave)) {
                         try {
-                            noticias.add(new Noticia(entry.getTitle(), entry.getDescription().getValue(), new URL(entry.getLink())));
+//                            noticias.add(new Noticia(entry.getTitle(), entry.getDescription().getValue(), new URL(entry.getLink())));
 
                             if (!conn.getNoticiaJaInserida(entry.getTitle())) {//se a noticia e nova ele insere
                                 conn.setInsertNoticiaEncontrada(entry.getTitle(), entry.getLink());
+                                noticias.add(new Noticia(entry.getTitle(), entry.getDescription().getValue(), new URL(entry.getLink())));
                             }
 
                         } catch (MalformedURLException ex) {
@@ -88,7 +89,31 @@ public class IRSSImpl implements IRSS {
                 }
             }
         }
+        if (noticias.size() > 0) {
+            montaMSGEmail(noticias);
+        }
         return noticias;
+    }
+
+    public void montaMSGEmail(List<Noticia> noticias) {
+//        if (noticias.size() > 0) {
+            String msgSendEmail = "";
+            //pegar o login do banco de dados
+            Conection conn = new Conection();
+            List<String> login = conn.getListaEmail();
+            String[] filtro = null;
+            for (String string : login) {
+                filtro = string.split("#");
+            }
+
+            for (Noticia noticiasEncontrada : noticias) {
+                System.out.println("Title: " + noticiasEncontrada.getTitulo() + "\nDesc: " + noticiasEncontrada.getNoticia() + "\n");
+                msgSendEmail = msgSendEmail + noticiasEncontrada.getTitulo() + "  -  LINK: " + noticiasEncontrada.getLink() + "\n";
+            }
+
+            IMail i = new ImailImpl();
+            i.sendEmail(filtro[1], filtro[2], filtro[1], msgSendEmail);
+//        }
     }
 
 }

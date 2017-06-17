@@ -24,6 +24,12 @@ public class Test {
     public static void main(String[] args) {
         //BANCO DE DADOS
         Conection conn = new Conection();
+          List<String> login = conn.getListaEmail();
+          for (String string : login) {
+              System.out.println(string);
+               String[] filtro =  string.split("#");
+               System.out.println(filtro[1]);
+        }
 //        conn.setDelete("drop table Site");
 //        conn.setDelete("drop table Termo");
 //        conn.setDelete("drop table Noticia");
@@ -42,10 +48,10 @@ public class Test {
 //            msgSendEmail = msgSendEmail + noticiasEncontrada.getTitulo() + "  -  LINK: " + noticiasEncontrada.getLink() + "\n";
 //        }
         //TESTE NOTICIAS ENCONTRADAS
-        List<String> noticiasEncontradas = conn.getListaNoticiasEncontradas();
-        for (String noticiasEncontrada : noticiasEncontradas) {
-            System.out.println(noticiasEncontrada);
-        }
+//        List<String> noticiasEncontradas = conn.getListaNoticiasEncontradas();
+//        for (String noticiasEncontrada : noticiasEncontradas) {
+//            System.out.println(noticiasEncontrada);
+//        }
 
         //TESTE ENVIA EMAIL
 //        if (noticiasEncontradas.size() > 0) {
