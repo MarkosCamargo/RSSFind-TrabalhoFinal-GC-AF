@@ -439,9 +439,9 @@ public class Conection implements ConectionSQLite {
         Statement comando;
         try {
             comando = getConection().createStatement();
-            ResultSet resultado = comando.executeQuery("select ID,Email from Email");
+            ResultSet resultado = comando.executeQuery("select ID, Email, senha from Email");
             while (resultado.next()) {
-                String objeto = resultado.getInt("ID") + "#" + resultado.getString("Email");
+                String objeto = resultado.getInt("ID") + "#" + resultado.getString("Email")+ "#" + resultado.getString("senha");
                 lista.add(objeto);
             }
         } catch (SQLException ex) {
