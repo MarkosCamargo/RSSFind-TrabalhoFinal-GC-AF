@@ -6,10 +6,11 @@
 package br.com.udesc.ceavi.findnews.leitorrss;
 
 import br.com.udesc.ceavi.findnews.modelo.Noticia;
-import com.sun.syndication.feed.synd.SyndEntry;
-import com.sun.syndication.feed.synd.SyndFeed;
-import com.sun.syndication.io.FeedException;
-import com.sun.syndication.io.SyndFeedInput;
+import com.rometools.rome.feed.synd.SyndEntry;
+import com.rometools.rome.feed.synd.SyndFeed;
+import com.rometools.rome.io.FeedException;
+import com.rometools.rome.io.SyndFeedInput;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -46,8 +47,12 @@ public class IRSSImpl implements IRSS {
 //        palavrasChaves.add("Dinheiro");
         List<Noticia> noticias = new ArrayList<>();
         for (URL site : sites) {
-            Charset inputCharset = Charset.forName("UTF-8");
-
+            Charset inputCharset;
+            if (site.toString().contains("valor")) {
+                inputCharset = Charset.forName("UTF-8");
+            } else {
+                inputCharset = Charset.forName("ISO-8859-1");
+            }
             HttpURLConnection httpcon = null;
             try {
                 httpcon = (HttpURLConnection) site.openConnection();
@@ -78,8 +83,8 @@ public class IRSSImpl implements IRSS {
 //                            noticias.add(new Noticia(entry.getTitle(), entry.getDescription().getValue(), new URL(entry.getLink())));
 
                             if (!conn.getNoticiaJaInserida(entry.getTitle())) {//se a noticia e nova ele insere
-                                conn.setInsertNoticiaEncontrada(entry.getTitle(), entry.getLink());
-                                noticias.add(new Noticia(entry.getTitle(), entry.getDescription().getValue(), new URL(entry.getLink())));
+                                conn.setInsertNoticiaEncontrada(entry.getTitle().trim(), entry.getLink().trim());
+                                noticias.add(new Noticia(entry.getTitle().trim(), entry.getDescription().getValue().trim(), new URL(entry.getLink().trim())));
                             }
 
                         } catch (MalformedURLException ex) {
@@ -97,22 +102,22 @@ public class IRSSImpl implements IRSS {
 
     public void montaMSGEmail(List<Noticia> noticias) {
 //        if (noticias.size() > 0) {
-            String msgSendEmail = "";
-            //pegar o login do banco de dados
-            Conection conn = new Conection();
-            List<String> login = conn.getListaEmail();
-            String[] filtro = null;
-            for (String string : login) {
-                filtro = string.split("#");
-            }
+        String msgSendEmail = "";
+        //pegar o login do banco de dados
+        Conection conn = new Conection();
+        List<String> login = conn.getListaEmail();
+        String[] filtro = null;
+        for (String string : login) {
+            filtro = string.split("#");
+        }
 
-            for (Noticia noticiasEncontrada : noticias) {
-                System.out.println("Title: " + noticiasEncontrada.getTitulo() + "\nDesc: " + noticiasEncontrada.getNoticia() + "\n");
-                msgSendEmail = msgSendEmail + noticiasEncontrada.getTitulo() + "  -  LINK: " + noticiasEncontrada.getLink() + "\n";
-            }
+        for (Noticia noticiasEncontrada : noticias) {
+            System.out.println("Title: " + noticiasEncontrada.getTitulo() + "\nDesc: " + noticiasEncontrada.getNoticia() + "\n");
+            msgSendEmail = msgSendEmail + noticiasEncontrada.getTitulo() + "  -  LINK: " + noticiasEncontrada.getLink() + "\n";
+        }
 
-            IMail i = new ImailImpl();
-            i.sendEmail(filtro[1], filtro[2], filtro[1], msgSendEmail);
+        IMail i = new ImailImpl();
+        i.sendEmail(filtro[1], filtro[2], filtro[1], msgSendEmail);
 //        }
     }
 

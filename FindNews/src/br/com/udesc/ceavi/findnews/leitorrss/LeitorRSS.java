@@ -5,11 +5,10 @@
  */
 package br.com.udesc.ceavi.findnews.leitorrss;
 
-import com.sun.syndication.feed.synd.SyndEntry;
-import com.sun.syndication.feed.synd.SyndFeed;
-import com.sun.syndication.io.FeedException;
-import com.sun.syndication.io.SyndFeedInput;
-import com.sun.syndication.io.XmlReader;
+import com.rometools.rome.feed.synd.SyndEntry;
+import com.rometools.rome.feed.synd.SyndFeed;
+import com.rometools.rome.io.FeedException;
+import com.rometools.rome.io.SyndFeedInput;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -34,12 +33,13 @@ public class LeitorRSS {
 //
 
         //biblioteca rome.jar
-        System.out.println("----------------  VALOR RSS FEED   ---------------------------");
-        URL feedUrl = new URL("http://www.valor.com.br/financas/rss");
-        Charset inputCharset = Charset.forName("UTF-8");
-//        System.out.println("----------------  ECONOMIA UOL RSS FEED   ---------------------------");
-//        URL feedUrl = new URL("http://rss.uol.com.br/feed/economia.xml");
-//        Charset inputCharset = Charset.forName("ISO-8859-1");
+//        System.out.println("----------------  VALOR RSS FEED   ---------------------------");
+//        URL feedUrl = new URL("http://www.valor.com.br/financas/rss");
+//        System.out.println(feedUrl.toString());
+//        Charset inputCharset = Charset.forName("UTF-8");
+        System.out.println("----------------  ECONOMIA UOL RSS FEED   ---------------------------");
+        URL feedUrl = new URL("http://rss.uol.com.br/feed/economia.xml");
+        Charset inputCharset = Charset.forName("ISO-8859-1");
       
         HttpURLConnection httpcon = (HttpURLConnection) feedUrl.openConnection();
 //        System.out.println(  httpcon.getHeaderFields().toString());
@@ -55,7 +55,7 @@ public class LeitorRSS {
             System.out.println("Link: " + entry.getLink());
             System.out.println("Autor: " + entry.getAuthor());
             System.out.println("Data de Publicaçao: " + entry.getPublishedDate());
-            System.out.println("Descriçao: " + entry.getDescription().getValue());
+            System.out.println("Descriçao: " + entry.getDescription().getValue().trim());
             System.out.println();
         }
 
