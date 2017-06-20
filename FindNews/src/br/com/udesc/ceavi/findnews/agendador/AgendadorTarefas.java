@@ -23,19 +23,8 @@ public class AgendadorTarefas {
      */
     public static void main(String[] args) {
         
-          Conection conn = new Conection();
-        List<String> horariosBD = conn.getListaHorarios();
-        List<Horario> horarios = new ArrayList<>();
-        for (String hora : horariosBD) {
-            Horario horario = new Horario();
-            String[] objeto = hora.split("#");
-            horario.setHora(Integer.parseInt(objeto[1].substring(0, 2)));
-            horario.setMinuto(Integer.parseInt(objeto[1].substring(3, 5)));
-            
-            System.out.println("HORA: "+horario.getHora()+"  MIN: "+horario.getMinuto());
-            horarios.add(horario);
-        }
-        
+        IAgendador a = new IAgendadorImpl();
+        a.run();
         
 
 //        //Pegar os horarios do banco de dados
