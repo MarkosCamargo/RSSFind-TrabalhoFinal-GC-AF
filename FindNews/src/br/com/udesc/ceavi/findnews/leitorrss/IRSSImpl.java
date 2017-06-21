@@ -97,6 +97,14 @@ public class IRSSImpl implements IRSS {
         }
         if (noticias.size() > 0) {
             montaMSGEmail(noticias);
+        }else{
+            try {
+                Log l = new Log();
+                l.logMessage("Nenhuma Noticia Encontrada");
+                System.out.println("Nenhuma Noticia Encontrada");
+            } catch (IOException ex) {
+                Logger.getLogger(IRSSImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return noticias;
     }
