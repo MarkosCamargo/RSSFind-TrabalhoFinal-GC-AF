@@ -5,13 +5,6 @@
  */
 package br.com.udesc.ceavi.findnews.agendador;
 
-import br.com.udesc.ceavi.findnews.modelo.Horario;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Timer;
-import sqlite.Conection;
-
 /**
  *
  * @author marcos
@@ -26,25 +19,6 @@ public class AgendadorTarefas {
         IAgendador a = new IAgendadorImpl();
         a.run();
         
-
-//        //Pegar os horarios do banco de dados
-//        List<Horario> horarios = new ArrayList<>();
-//        horarios.add(new Horario(23, 25));
-//        horarios.add(new Horario(23, 24));
-//        
-//        for (Horario horario : horarios) {
-//            Agendador agendador = new Agendador();
-//            Timer timer = new Timer();
-//            Date d = new Date();
-//
-//            d.setHours(horario.getHora());
-//            d.setMinutes(horario.getMinuto());
-//            d.setSeconds(0);
-//
-//            timer.schedule(agendador, d);
-////            timer.purge();s
-//
-//        }
 
     }
 }

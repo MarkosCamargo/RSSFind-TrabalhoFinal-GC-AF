@@ -5,6 +5,7 @@
  */
 package br.com.udesc.ceavi.findnews.leitorrss;
 
+import br.com.udesc.ceavi.findnews.agendador.Log;
 import br.com.udesc.ceavi.findnews.modelo.Noticia;
 import com.rometools.rome.feed.synd.SyndEntry;
 import com.rometools.rome.feed.synd.SyndFeed;
@@ -113,6 +114,12 @@ public class IRSSImpl implements IRSS {
 
         for (Noticia noticiasEncontrada : noticias) {
             System.out.println("Title: " + noticiasEncontrada.getTitulo() + "\nDesc: " + noticiasEncontrada.getNoticia() + "\n");
+            Log l = new Log();
+            try {
+                l.logMessage("Title: " + noticiasEncontrada.getTitulo() + "\nDesc: " + noticiasEncontrada.getNoticia());
+            } catch (IOException ex) {
+                Logger.getLogger(IRSSImpl.class.getName()).log(Level.SEVERE, null, ex);
+            }
             msgSendEmail = msgSendEmail + noticiasEncontrada.getTitulo() + "  -  LINK: " + noticiasEncontrada.getLink() + "\n";
         }
 
